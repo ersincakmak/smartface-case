@@ -1,13 +1,7 @@
 import homeworkPng from "./homework.png";
 import homeworkPdf from "./hmPdf.pdf";
 import { User } from "../types/user";
-
-interface Homeworks {
-  id: string;
-  publisherId: string;
-  title: string;
-  description: string;
-}
+import { Homeworks } from "../types/homework";
 
 interface CompletedHomeworks {
   id: string;

@@ -24,7 +24,7 @@ const TableContainer = styled.div`
     width: 3.125rem; // 50px
     height: 3.125rem; // 50px
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
   }
 `;
 
@@ -70,9 +70,7 @@ const Teachers = () => {
       accessor: undefined,
       Cell: ({ row }: CellProps<User>) => {
         return (
-          <Button
-            onClick={() => navigation(`/teacher/${row.original.username}`)}
-          >
+          <Button onClick={() => navigation(`/teacher/${row.original.id}`)}>
             View Details
           </Button>
         );

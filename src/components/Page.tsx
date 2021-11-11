@@ -6,6 +6,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding-inline: 1em;
 `;
 
 const Page: React.FC = ({ children }) => {

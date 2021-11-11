@@ -1,6 +1,7 @@
 import React from "react";
 import { useTable, Column } from "react-table";
 import styled from "styled-components";
+import { Homeworks } from "../types/homework";
 import { User } from "../types/user";
 
 const TableContainer = styled.table`
@@ -42,12 +43,12 @@ const TableBody = styled.tbody`
   }
 `;
 
-interface Props<T extends User> {
-  columns: Column<T>[];
-  data: T[];
+interface PropsUser {
+  columns: Column<any>[];
+  data: any[];
 }
 
-const Table: React.FC<Props<User>> = ({ columns, data }) => {
+const Table: React.FC<PropsUser> = ({ columns, data }) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
       columns,

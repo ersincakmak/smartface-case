@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
+import Teacher from "./pages/Teacher";
 import Teachers from "./pages/Teachers";
 
 const AppContainer = styled.div`
@@ -23,6 +24,14 @@ const App = () => {
             element={
               <ProtectedRoute userType="principal">
                 <Teachers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/teacher/:id"
+            element={
+              <ProtectedRoute userType="teacher">
+                <Teacher />
               </ProtectedRoute>
             }
           />
