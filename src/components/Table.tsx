@@ -1,8 +1,6 @@
 import React from "react";
-import { useTable, Column } from "react-table";
+import { Column, useTable } from "react-table";
 import styled from "styled-components";
-import { Homeworks } from "../types/homework";
-import { User } from "../types/user";
 
 const TableContainer = styled.table`
   width: 100%;
