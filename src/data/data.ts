@@ -1,16 +1,6 @@
 import homeworkPng from "./homework.png";
 import homeworkPdf from "./hmPdf.pdf";
-
-interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  avatar: string;
-  username: string;
-  password: string;
-  userType: "principle" | "teacher" | "student";
-  teacherId?: string;
-}
+import { User } from "../types/user";
 
 interface Homeworks {
   id: string;
@@ -29,9 +19,9 @@ interface CompletedHomeworks {
 export const users: User[] = [
   {
     firstName: "Kendra",
-    username: "Kendra",
-    password: "kendraRoob",
-    userType: "principle",
+    username: "principal",
+    password: "principal",
+    userType: "principal",
     avatar: "https://cdn.fakercloud.com/avatars/kudretkeskin_128.jpg",
     lastName: "Roob",
     id: "1",
@@ -47,8 +37,8 @@ export const users: User[] = [
   },
   {
     firstName: "Ryleigh",
-    username: "Ryleigh",
-    password: "ryleighJohnston",
+    username: "teacher1",
+    password: "teacher1",
     userType: "teacher",
     avatar: "https://cdn.fakercloud.com/avatars/dhrubo_128.jpg",
     lastName: "Johnston",
@@ -56,8 +46,8 @@ export const users: User[] = [
   },
   {
     firstName: "Bertram",
-    username: "Bertram",
-    password: "berthamSkiles",
+    username: "teacher2",
+    password: "teacher2",
     userType: "teacher",
     avatar: "https://cdn.fakercloud.com/avatars/gkaam_128.jpg",
     lastName: "Skiles",
@@ -65,8 +55,8 @@ export const users: User[] = [
   },
   {
     firstName: "Orrin",
-    username: "Orrin",
-    password: "orrinNitz",
+    username: "teacher3",
+    password: "teacher3",
     userType: "teacher",
     avatar: "https://cdn.fakercloud.com/avatars/edkf_128.jpg",
     lastName: "Nitzsche",
@@ -74,8 +64,8 @@ export const users: User[] = [
   },
   {
     firstName: "Reynold",
-    username: "Reynold",
-    password: "reynoldZiemann",
+    username: "student1",
+    password: "student1",
     userType: "student",
     avatar: "https://cdn.fakercloud.com/avatars/GavicoInd_128.jpg",
     lastName: "Ziemann",
@@ -84,8 +74,8 @@ export const users: User[] = [
   },
   {
     firstName: "Kelsi",
-    username: "Kelsi",
-    password: "kelsiBoehm",
+    username: "student2",
+    password: "student2",
     userType: "student",
     avatar: "https://cdn.fakercloud.com/avatars/russoedu_128.jpg",
     lastName: "Boehm",
@@ -94,8 +84,8 @@ export const users: User[] = [
   },
   {
     firstName: "Laney",
-    username: "Laney",
-    password: "laneyBeier",
+    username: "student3",
+    password: "student3",
     userType: "student",
     avatar: "https://cdn.fakercloud.com/avatars/quailandquasar_128.jpg",
     lastName: "Beier",
