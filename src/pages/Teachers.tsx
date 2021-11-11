@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Page from "../components/Page";
 import Table from "../components/Table";
 import { users } from "../data/data";
-import { useAppSelector } from "../redux/store";
 import { User } from "../types/user";
 
 const Container = styled.div`
@@ -43,8 +42,6 @@ const Button = styled.button`
 
 const Teachers = () => {
   const [data, setdata] = useState<User[]>([]);
-
-  const { user } = useAppSelector((state) => state.user);
 
   const navigation = useNavigate();
 
