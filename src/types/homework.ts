@@ -4,3 +4,10 @@ export interface Homeworks {
   title: string;
   description: string;
 }
+
+export interface CompletedHomeworks {
+  id: string;
+  homeworkId: string;
+  studentId: string;
+  document: any;
+}

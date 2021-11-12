@@ -5,7 +5,7 @@ import { CellProps, Column } from "react-table";
 import styled from "styled-components";
 import LinkButton from "../components/LinkButton";
 import Page from "../components/Page";
-import Profile from "../components/Profile";
+import { TeacherProfile } from "../components/Profile";
 import Table from "../components/Table";
 import { homeworks, users } from "../data/data";
 import { Homeworks } from "../types/homework";
@@ -140,7 +140,7 @@ const Teacher = () => {
   return (
     <Page>
       <Container>
-        <Profile {...teacher} />
+        <TeacherProfile {...teacher} />
         <SwitcherContainer>
           <Label checked={tableType === "homeworks"}>
             Homeworks

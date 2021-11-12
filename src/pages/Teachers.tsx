@@ -13,7 +13,7 @@ const Container = styled.div`
   flex-direction: column;
   width: min(75rem, 100%); // 1200px
   margin-inline: auto;
-  padding-top: 3em;
+  padding: 1em;
   overflow: hidden;
 `;
 
@@ -70,6 +70,7 @@ const Teachers = () => {
   return (
     <Page>
       <Container>
+        <h1>Teachers</h1>
         <TableContainer>
           <Table columns={columns} data={data} />
         </TableContainer>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { users } from "../data/data";
 import { User } from "../types/user";
 
 const Container = styled.div`
@@ -30,8 +31,8 @@ const Image = styled.img`
 const Information = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  padding: 1em;
+  gap: 0.7em;
+  padding: 0.7em;
 
   @media only screen and (max-width: 40rem) {
     gap: 0.4em;
@@ -51,7 +52,7 @@ const Title = styled(Text)`
 
 interface Props extends User {}
 
-const Profile: React.FC<Props> = ({ ...user }) => {
+export const TeacherProfile: React.FC<Props> = ({ ...user }) => {
   return (
     <Container>
       <Image src={user.avatar} alt="ProfileImage" />
@@ -65,4 +66,20 @@ const Profile: React.FC<Props> = ({ ...user }) => {
   );
 };
 
-export default Profile;
+export const StudentProfile: React.FC<Props> = ({ ...user }) => {
+  const teacher = users.find((item) => item.id === user.teacherId);
+  return (
+    <Container>
+      <Image src={user.avatar} alt="ProfileImage" />
+      <Information>
+        <Title>{user.userType.toUpperCase()}</Title>
+        <Text>
+          Teacher: {teacher?.firstName} {teacher?.lastName}
+        </Text>
+        <Text>Firstname: {user.firstName}</Text>
+        <Text>Lastname: {user.lastName}</Text>
+        <Text>Username: {user.username}</Text>
+      </Information>
+    </Container>
+  );
+};

@@ -1,14 +1,7 @@
 import homeworkPng from "./homework.png";
 import homeworkPdf from "./hmPdf.pdf";
 import { User } from "../types/user";
-import { Homeworks } from "../types/homework";
-
-interface CompletedHomeworks {
-  id: string;
-  homeworkId: string;
-  studentId: string;
-  document: any;
-}
+import { CompletedHomeworks, Homeworks } from "../types/homework";
 
 export const users: User[] = [
   {
