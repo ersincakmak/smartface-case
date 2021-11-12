@@ -8,7 +8,7 @@ import Page from "../components/Page";
 import { StudentProfile } from "../components/Profile";
 import Table from "../components/Table";
 import { completedHomeworks, homeworks, users } from "../data/data";
-import { CompletedHomeworks, Homeworks } from "../types/homework";
+import { Homeworks } from "../types/homework";
 import { User } from "../types/user";
 
 const Container = styled.div`
@@ -19,7 +19,7 @@ const Container = styled.div`
   overflow: hidden;
   width: min(75rem, 100%); // 1200px
   margin-inline: auto;
-  padding-top: 1em;
+  padding: 1em 0;
 `;
 
 const Label = styled.label<{

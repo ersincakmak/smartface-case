@@ -8,7 +8,7 @@ const Container = styled.nav`
   align-items: center;
   justify-content: space-between;
   width: min(75rem, 100%); // 1200px
-  padding: 1em;
+  padding: 1em 0;
   margin-inline: auto;
   border-bottom: 2px solid ${(props) => props.theme.colors.text.primary};
 `;
@@ -42,6 +42,10 @@ const Nav = () => {
     {
       path: "/students",
       label: "Students",
+    },
+    {
+      path: "/homeworks",
+      label: "Homeworks",
     },
   ];
 

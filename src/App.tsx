@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Homeworks from "./pages/Homeworks";
 import Login from "./pages/Login";
 import Student from "./pages/Student";
 import Students from "./pages/Students";
@@ -50,6 +51,14 @@ const App = () => {
             element={
               <ProtectedRoute userType="student">
                 <Student />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/homeworks"
+            element={
+              <ProtectedRoute userType="teacher">
+                <Homeworks />
               </ProtectedRoute>
             }
           />

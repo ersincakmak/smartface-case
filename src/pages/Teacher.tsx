@@ -19,7 +19,7 @@ const Container = styled.div`
   overflow: hidden;
   width: min(75rem, 100%); // 1200px
   margin-inline: auto;
-  padding-top: 1em;
+  padding: 1em 0;
 `;
 
 const TableContainer = styled.div`
