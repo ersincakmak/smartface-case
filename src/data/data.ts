@@ -212,12 +212,6 @@ export const completedHomeworks: CompletedHomeworks[] = [
     document: homeworkPng,
   },
   {
-    id: "3",
-    homeworkId: "1",
-    studentId: "8",
-    document: homeworkPdf,
-  },
-  {
     id: "4",
     homeworkId: "2",
     studentId: "9",
@@ -228,12 +222,6 @@ export const completedHomeworks: CompletedHomeworks[] = [
     homeworkId: "2",
     studentId: "10",
     document: homeworkPng,
-  },
-  {
-    id: "6",
-    homeworkId: "2",
-    studentId: "11",
-    document: homeworkPdf,
   },
   {
     id: "7",
@@ -248,12 +236,6 @@ export const completedHomeworks: CompletedHomeworks[] = [
     document: homeworkPng,
   },
   {
-    id: "9",
-    homeworkId: "3",
-    studentId: "14",
-    document: homeworkPdf,
-  },
-  {
     id: "10",
     homeworkId: "4",
     studentId: "15",
@@ -264,11 +246,5 @@ export const completedHomeworks: CompletedHomeworks[] = [
     homeworkId: "4",
     studentId: "16",
     document: homeworkPng,
-  },
-  {
-    id: "12",
-    homeworkId: "4",
-    studentId: "17",
-    document: homeworkPdf,
   },
 ];

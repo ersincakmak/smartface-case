@@ -2,7 +2,7 @@
 import { Form, FormikProvider, useFormik } from "formik";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 import FormikField from "../components/FormikField";
@@ -74,9 +74,9 @@ const Login = () => {
         case "principal":
           return navigate("/teachers");
         case "teacher":
-          return navigate(`/teachers/${user.username}`);
+          return navigate(`/teacher/${user.id}`);
         default:
-          return navigate(`/homeworks/student/${user?.username}`);
+          return navigate(`/homeworks/student/${user?.id}`);
       }
     }
   }, [isLoggedIn]);
@@ -99,17 +99,6 @@ const Login = () => {
 
   return (
     <>
-      <ToastContainer
-        position="top-left"
-        autoClose={5000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <LoginPage>
         <FormikProvider value={formik}>
           <FormikForm noValidate>

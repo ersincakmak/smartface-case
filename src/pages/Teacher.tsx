@@ -8,6 +8,7 @@ import Page from "../components/Page";
 import { TeacherProfile } from "../components/Profile";
 import Table from "../components/Table";
 import { homeworks, users } from "../data/data";
+import { useAppSelector } from "../redux/store";
 import { Homeworks } from "../types/homework";
 import { User } from "../types/user";
 
@@ -71,6 +72,7 @@ const Teacher = () => {
     "homeworks"
   );
 
+  const { user } = useAppSelector((state) => state.user);
   const { id } = useParams();
   const navigation = useNavigate();
 
@@ -115,8 +117,12 @@ const Teacher = () => {
   ];
 
   useEffect(() => {
-    setteacher(users.find((item) => item.id === id));
-    setcolumns(homeWorkColumns);
+    if (user?.userType === "teacher" && user.id !== id) {
+      navigation(`teacher/${user.id}`);
+    } else {
+      setteacher(users.find((item) => item.id === id));
+      setcolumns(homeWorkColumns);
+    }
   }, []);
 
   useEffect(() => {

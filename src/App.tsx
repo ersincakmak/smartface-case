@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Homeworks from "./pages/Homeworks";
@@ -19,6 +20,17 @@ const AppContainer = styled.div`
 const App = () => {
   return (
     <AppContainer>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

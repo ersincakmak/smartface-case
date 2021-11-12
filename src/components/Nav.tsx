@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { useAppSelector } from "../redux/store";
+import { logout } from "../redux/slices/userSlice";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 
 const Container = styled.nav`
   display: flex;
@@ -31,8 +32,22 @@ const Link = styled(NavLink)`
   }
 `;
 
+const LogoutButton = styled.button`
+  color: ${(props) => props.theme.colors.text.error};
+  padding: 0.2em 0.5em;
+  transition: all 0.2s ease;
+  font-size: 1.125rem; // 18px
+  cursor: pointer;
+  background-color: transparent;
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
 const Nav = () => {
   const { user } = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
 
   const PrincipalRoutes = [
     {
@@ -49,11 +64,12 @@ const Nav = () => {
     },
   ];
 
-  // const TeacherRoutes = [
-  //   {
-  //     path: `/students/${user?.username}`,
-  //   },
-  // ];
+  const TeacherRoutes = [
+    {
+      path: `/teacher/${user?.id}`,
+      label: "My Profile",
+    },
+  ];
 
   return (
     <Container>
@@ -65,7 +81,14 @@ const Nav = () => {
                 {item.label}
               </Link>
             ))
+          : user?.userType === "teacher"
+          ? TeacherRoutes.map((item) => (
+              <Link to={item.path} key={item.path}>
+                {item.label}
+              </Link>
+            ))
           : null}
+        <LogoutButton onClick={() => dispatch(logout())}>Logout</LogoutButton>
       </Links>
     </Container>
   );

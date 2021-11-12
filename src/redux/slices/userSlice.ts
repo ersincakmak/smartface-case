@@ -28,9 +28,14 @@ export const userSlice = createSlice({
     clearError: (state) => {
       state.error = "";
     },
+
+    logout: (state) => {
+      state.isLoggedIn = false;
+      state.user = undefined;
+    },
   },
 });
 
-export const { login, clearError } = userSlice.actions;
+export const { login, clearError, logout } = userSlice.actions;
 
 export default userSlice.reducer;
