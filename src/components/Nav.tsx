@@ -39,6 +39,10 @@ const Nav = () => {
       path: "/teachers",
       label: "Teachers",
     },
+    {
+      path: "/students",
+      label: "Students",
+    },
   ];
 
   // const TeacherRoutes = [
@@ -53,7 +57,9 @@ const Nav = () => {
       <Links>
         {user?.userType === "principal"
           ? PrincipalRoutes.map((item) => (
-              <Link to={item.path}>{item.label}</Link>
+              <Link to={item.path} key={item.path}>
+                {item.label}
+              </Link>
             ))
           : null}
       </Links>

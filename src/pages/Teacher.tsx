@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CellProps, Column } from "react-table";
 import styled from "styled-components";
+import LinkButton from "../components/LinkButton";
 import Page from "../components/Page";
 import Profile from "../components/Profile";
 import Table from "../components/Table";
@@ -60,18 +61,6 @@ const Label = styled.label<{
   }
 `;
 
-const Button = styled.button`
-  color: ${(props) => props.theme.colors.text.gray};
-  transition: all 0.2s ease;
-  background-color: transparent;
-  cursor: pointer;
-
-  :hover {
-    color: ${(props) => props.theme.colors.text.primary};
-    text-decoration: underline;
-  }
-`;
-
 const Teacher = () => {
   const [teacher, setteacher] = useState<User>();
   const [columns, setcolumns] = useState<Column<Homeworks>[] | Column<User>[]>(
@@ -117,9 +106,9 @@ const Teacher = () => {
       accessor: undefined,
       Cell: ({ row }: CellProps<User>) => {
         return (
-          <Button onClick={() => navigation(`/student/${row.original.id}`)}>
+          <LinkButton onClick={() => navigation(`/student/${row.original.id}`)}>
             View Details
-          </Button>
+          </LinkButton>
         );
       },
     },
