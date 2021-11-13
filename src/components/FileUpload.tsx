@@ -35,37 +35,30 @@ const Buttons = styled.div`
   gap: 1em;
 `;
 
-const Button = styled.button<{
-  color: "primary" | "error";
-}>`
+const Button = styled.button`
   display: inline-block;
   padding: 0.3em 0.5em;
   cursor: pointer;
   transition: all 0.2s ease;
-  background-color: ${(props) =>
-    props.color === "primary"
-      ? props.theme.colors.button.primary.base
-      : props.theme.colors.text.error.base};
-
+  background-color: ${(props) => props.theme.colors.button.primary.base};
   :hover {
-    background-color: ${(props) =>
-      props.color === "primary"
-        ? props.theme.colors.button.primary.hovered
-        : props.theme.colors.text.error.hovered};
+    background-color: ${(props) => props.theme.colors.button.primary.hovered};
   }
-
   :disabled {
     cursor: no-drop;
     :hover {
-      background-color: ${(props) =>
-        props.color === "primary"
-          ? props.theme.colors.button.primary.base
-          : props.theme.colors.text.error.base};
+      background-color: ${(props) => props.theme.colors.button.primary.base};
     }
   }
-
   border-radius: 5px;
+`;
+
+const CancelButton = styled(Button)`
+  background-color: ${(props) => props.theme.colors.text.error.base};
   color: white;
+  :hover {
+    background-color: ${(props) => props.theme.colors.text.error.hovered};
+  }
 `;
 
 interface Props {
@@ -109,15 +102,17 @@ const FileUpload: React.FC<Props> = ({ onCancel, onSubmit }) => {
         )}
       </DropZone>
       {file && (
-          <a href={file} download="preview">Download</a>
+        <a href={file} download="preview">
+          Download
+        </a>
       )}
       <Buttons>
-        <Button color="primary" disabled={file === undefined} onClick={() => onSubmit(file)}>
+        <Button disabled={file === undefined} onClick={() => onSubmit(file)}>
           Upload
         </Button>
-        <Button color="error" onClick={onCancel}>
+        <CancelButton color="error" onClick={onCancel}>
           Cancel
-        </Button>
+        </CancelButton>
       </Buttons>
     </Container>
   );

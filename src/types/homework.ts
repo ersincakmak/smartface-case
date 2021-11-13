@@ -11,3 +11,8 @@ export interface CompletedHomeworks {
   studentId: string;
   document: any;
 }
+
+export interface CreateHomeWorkObject {
+  title: string;
+  description: string;
+}

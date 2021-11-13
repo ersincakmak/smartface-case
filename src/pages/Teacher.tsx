@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CellProps, Column } from "react-table";
 import styled from "styled-components";
+import CreateHomework from "../components/CreateHomework";
 import LinkButton from "../components/LinkButton";
 import Page from "../components/Page";
 import { TeacherProfile } from "../components/Profile";
 import Table from "../components/Table";
 import { homeworks, users } from "../data/data";
 import { useAppSelector } from "../redux/store";
-import { Homeworks } from "../types/homework";
+import { CreateHomeWorkObject, Homeworks } from "../types/homework";
 import { User } from "../types/user";
+import { v4 as uuidv4 } from "uuid";
 
 const Container = styled.div`
   flex: 1;
@@ -62,15 +64,39 @@ const Label = styled.label<{
   }
 `;
 
+const Button = styled.button`
+  display: inline-block;
+  width: max-content;
+  background-color: ${(props) => props.theme.colors.button.primary.base};
+  padding: 0.5em;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px -2px #00000025;
+  :hover {
+    background-color: ${(props) => props.theme.colors.button.primary.hovered};
+  }
+`;
+
+const Popup = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  background-color: #00000025;
+  z-index: 3;
+`;
+
 const Teacher = () => {
   const [teacher, setteacher] = useState<User>();
   const [columns, setcolumns] = useState<Column<Homeworks>[] | Column<User>[]>(
     []
   );
-  const [data, setdata] = useState<User[] | Homeworks[]>([]);
+  const [students, setstudents] = useState<User[]>([]);
+  const [homeworkState, sethomeworkState] = useState<Homeworks[]>([]);
   const [tableType, settableType] = useState<"homeworks" | "students">(
     "homeworks"
   );
+  const [popup, setpopup] = useState<boolean>(false);
 
   const { user } = useAppSelector((state) => state.user);
   const { id } = useParams();
@@ -126,17 +152,34 @@ const Teacher = () => {
   }, []);
 
   useEffect(() => {
+    setcolumns(homeWorkColumns);
+    sethomeworkState(homeworks.filter((item) => item.publisherId === id));
+    setstudents(users.filter((item) => item.teacherId === id));
+  }, []);
+
+  useEffect(() => {
     if (tableType === "homeworks") {
       setcolumns(homeWorkColumns);
-      setdata(homeworks.filter((item) => item.publisherId === id));
     } else {
       setcolumns(studenstColumns);
-      setdata(users.filter((item) => item.teacherId === id));
     }
   }, [tableType]);
 
   const handleChangeTableType = (value: "homeworks" | "students") => {
     settableType(value);
+  };
+
+  const createHomeworkSubmit = (values: CreateHomeWorkObject) => {
+    sethomeworkState([
+      ...homeworkState,
+      {
+        id: uuidv4(),
+        description: values.description,
+        title: values.title,
+        publisherId: teacher?.id as string,
+      },
+    ]);
+    setpopup(false);
   };
 
   if (!teacher) {
@@ -146,8 +189,21 @@ const Teacher = () => {
   return (
     <Page>
       <Container>
+        {popup && (
+          <Popup>
+            <CreateHomework
+              onCancel={() => setpopup(false)}
+              onSubmit={(values: CreateHomeWorkObject) =>
+                createHomeworkSubmit(values)
+              }
+            />
+          </Popup>
+        )}
         <TeacherProfile {...teacher} />
         <SwitcherContainer>
+          {user?.userType === "teacher" && (
+            <Button onClick={() => setpopup(true)}>New Homework</Button>
+          )}
           <Label checked={tableType === "homeworks"}>
             Homeworks
             <input
@@ -170,7 +226,10 @@ const Teacher = () => {
           </Label>
         </SwitcherContainer>
         <TableContainer>
-          <Table columns={columns} data={data} />
+          <Table
+            columns={columns}
+            data={tableType === "homeworks" ? homeworkState : students}
+          />
         </TableContainer>
       </Container>
     </Page>
