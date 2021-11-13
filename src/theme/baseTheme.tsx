@@ -12,7 +12,10 @@ const baseTheme: DefaultTheme = {
     text: {
       primary: "#191A19",
       gray: "#808080",
-      error: "#ff2828",
+      error: {
+        base: "#ff4646",
+        hovered : "#da0000",
+      }
     },
     table: {
       hover: "#e4c7ae68",

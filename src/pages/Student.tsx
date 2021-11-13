@@ -1,15 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CellProps, Column } from "react-table";
 import styled from "styled-components";
+import FileUpload from "../components/FileUpload";
 import LinkButton from "../components/LinkButton";
 import Page from "../components/Page";
 import { StudentProfile } from "../components/Profile";
 import Table from "../components/Table";
 import { completedHomeworks, homeworks, users } from "../data/data";
-import { Homeworks } from "../types/homework";
+import { useAppSelector } from "../redux/store";
+import { CompletedHomeworks, Homeworks } from "../types/homework";
 import { User } from "../types/user";
+import { v4 as uuidv4 } from "uuid";
 
 const Container = styled.div`
   flex: 1;
@@ -40,49 +43,99 @@ const TableContainer = styled.div`
   overflow: auto;
 `;
 
+const Popup = styled.div`
+  display: flex;
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0000007f;
+  z-index: 3;
+  padding: 1em;
+`;
+
 const Student = () => {
   const [student, setstudent] = useState<User>();
   const [data, setdata] = useState<Homeworks[]>([]);
+  const [myHomeworks, setmyHomeworks] = useState<CompletedHomeworks[]>([]);
+  const [popup, setpopup] = useState<{
+    id: string;
+    open: boolean;
+  }>();
 
+  const { user } = useAppSelector((state) => state.user);
   const { id } = useParams();
 
   useEffect(() => {
     const st = users.find((item) => item.id === id);
     setstudent(st);
     setdata(homeworks.filter((item) => item.publisherId === st?.teacherId));
+    setmyHomeworks(completedHomeworks.filter((item) => item.studentId === id));
   }, []);
 
-  const columns: Column<Homeworks>[] = [
-    {
-      Header: "Title",
-      accessor: "title",
-    },
-    {
-      Header: "Description",
-      accessor: "description",
-    },
-    {
-      Header: "Answer",
-      accessor: undefined,
-      Cell: ({ row }: CellProps<Homeworks>) => {
-        const homeworkID = row.original.id;
-        const document = completedHomeworks.find(
-          (item) =>
-            item.homeworkId === homeworkID && item.studentId === student?.id
-        );
-
-        if (document) {
-          return (
-            <a href={document.document} download="homework">
-              <LinkButton type="button">Download</LinkButton>
-            </a>
-          );
-        } else {
-          return "Not yet completed";
-        }
+  const columns: Column<Homeworks>[] = useMemo(
+    () => [
+      {
+        Header: "Title",
+        accessor: "title",
       },
-    },
-  ];
+      {
+        Header: "Description",
+        accessor: "description",
+      },
+      {
+        Header: "Answer",
+        accessor: undefined,
+        Cell: ({ row }: CellProps<Homeworks>) => {
+          const homeworkID = row.original.id;
+          const document = myHomeworks.find(
+            (item) =>
+              item.homeworkId === homeworkID && item.studentId === student?.id
+          );
+
+          if (document) {
+            return (
+              <a href={document.document} download="homework">
+                <LinkButton type="button">Download</LinkButton>
+              </a>
+            );
+          } else {
+            if (user?.userType === "student") {
+              return (
+                <LinkButton
+                  onClick={() =>
+                    setpopup({
+                      open: true,
+                      id: row.original.id,
+                    })
+                  }
+                >
+                  Upload File
+                </LinkButton>
+              );
+            } else {
+              return "Not yet completed";
+            }
+          }
+        },
+      },
+    ],
+    [myHomeworks]
+  );
+
+  const myData = useMemo(() => data, [myHomeworks]);
+
+  const fileUploadSubmit = (file: any) => {
+    setmyHomeworks([
+      ...myHomeworks,
+      {
+        homeworkId: popup?.id as string,
+        document: file,
+        id: uuidv4(),
+        studentId: user?.id as string,
+      },
+    ]);
+  };
 
   if (!student) {
     return null;
@@ -91,10 +144,29 @@ const Student = () => {
   return (
     <Page>
       <Container>
+        {popup?.open && (
+          <Popup>
+            <FileUpload
+              onSubmit={(file: any) => {
+                setpopup({
+                  id: "",
+                  open: false,
+                });
+                fileUploadSubmit(file);
+              }}
+              onCancel={() =>
+                setpopup({
+                  id: "",
+                  open: false,
+                })
+              }
+            />
+          </Popup>
+        )}
         <StudentProfile {...student} />
         <Label checked={true}>Homeworks</Label>
         <TableContainer>
-          <Table columns={columns} data={data} />
+          <Table columns={columns} data={myData} />
         </TableContainer>
       </Container>
     </Page>

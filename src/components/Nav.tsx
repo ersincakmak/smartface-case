@@ -33,7 +33,7 @@ const Link = styled(NavLink)`
 `;
 
 const LogoutButton = styled.button`
-  color: ${(props) => props.theme.colors.text.error};
+  color: ${(props) => props.theme.colors.text.error.base};
   padding: 0.2em 0.5em;
   transition: all 0.2s ease;
   font-size: 1.125rem; // 18px

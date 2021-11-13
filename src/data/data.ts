@@ -15,8 +15,8 @@ export const users: User[] = [
   },
   {
     firstName: "Maudie",
-    username: "Maudie",
-    password: "muadiePf",
+    username: "teacher",
+    password: "teacher",
     userType: "teacher",
     avatar: "https://cdn.fakercloud.com/avatars/sementiy_128.jpg",
     lastName: "Pfannerstill",

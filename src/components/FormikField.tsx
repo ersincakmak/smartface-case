@@ -28,7 +28,7 @@ const Input = styled.input`
 `;
 
 const Error = styled.span`
-  color: ${(props) => props.theme.colors.text.error};
+  color: ${(props) => props.theme.colors.text.error.base};
   font-size: 0.875rem; // 14px
 `;
 

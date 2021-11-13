@@ -76,7 +76,7 @@ const Login = () => {
         case "teacher":
           return navigate(`/teacher/${user.id}`);
         default:
-          return navigate(`/homeworks/student/${user?.id}`);
+          return navigate(`/student/${user?.id}`);
       }
     }
   }, [isLoggedIn]);

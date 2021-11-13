@@ -10,7 +10,10 @@ declare module "styled-components" {
       text: {
         primary: string;
         gray: string;
-        error: string;
+        error: {
+          base: string;
+          hovered: string;
+        };
       };
       button: {
         primary: {
