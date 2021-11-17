@@ -4,7 +4,7 @@ This repo was created for the smartface company. If I'm talking about the projec
 
 ## Demo
 
-You can reach the demo in [this link](https://smartface-case.netlify.app/).
+You can reach the demo in [this link](https://smartface-case-ersincakmak.netlify.app/).
 
 
 ## Login Informations
